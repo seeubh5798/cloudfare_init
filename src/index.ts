@@ -13,6 +13,15 @@
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return new Response('Hello World!');
+		console.log(request);
+		return Response.json({
+			"message" : " first cloudfare worker running for me",
+			"your city is" : request.cf?.city
+		})
 	},
 } satisfies ExportedHandler<Env>;
+
+
+// Question - Where is the express code? HTTP Server?
+// Cloudflare expects you to just write the logic to handle a request. 
+// Creating an HTTP server on top is handled by cloudflareCloudflare does not expect a routing library/http server out of the box. You can write a full application with just the constructs available above.
